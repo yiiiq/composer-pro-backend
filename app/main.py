@@ -6,6 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 from app.routers import health, predictions, music_generation
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Compose Pro Backend",
@@ -23,9 +27,14 @@ app.add_middleware(
 )
 
 # Include routers
+logger.info("Registering health router...")
 app.include_router(health.router, prefix="/api", tags=["health"])
+logger.info("Registering predictions router...")
 app.include_router(predictions.router, prefix="/api", tags=["predictions"])
+logger.info("Registering music_generation router...")
 app.include_router(music_generation.router, prefix="/api", tags=["music-generation"])
+logger.info("All routers registered successfully!")
+logger.info(f"Available routes: {[route.path for route in app.routes]}")
 
 
 @app.get("/")
