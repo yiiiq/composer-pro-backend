@@ -5,11 +5,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from app.routers import health, predictions
+from app.routers import health, predictions, music_generation
 
 app = FastAPI(
     title="Compose Pro Backend",
-    description="FastAPI backend for ML model serving",
+    description="FastAPI backend for ML model serving and music generation",
     version="1.0.0",
 )
 
@@ -25,6 +25,7 @@ app.add_middleware(
 # Include routers
 app.include_router(health.router, prefix="/api", tags=["health"])
 app.include_router(predictions.router, prefix="/api", tags=["predictions"])
+app.include_router(music_generation.router, prefix="/api", tags=["music-generation"])
 
 
 @app.get("/")
