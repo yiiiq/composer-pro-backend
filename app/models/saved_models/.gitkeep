@@ -1,0 +1,8 @@
+# Place your trained model files here (.pkl, .h5, .pt, .pth, etc.)
+# This directory is created automatically by model_loader.py
+*.pkl
+*.h5
+*.pt
+*.pth
+*.onnx
+*.pb
